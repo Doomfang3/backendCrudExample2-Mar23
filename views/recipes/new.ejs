@@ -1,0 +1,25 @@
+<!-- Ternary -> condition ? what happens if true : what happens if false -->
+<h1><%- isUpdating ? "Update" : "Create" %> a new recipe</h1>
+<form method="POST" action="<%-isUpdating ? `/recipes/${recipe._id}/update` : '/recipes/new' %>">
+  <label>Title: <input name="title" value="<%- isUpdating ? recipe.title : "" %>" /></label>
+
+  <label
+    >Ingredients: <input name="ingredients" value="<%- isUpdating ? recipe.ingredients.join(' ') :
+    "" %>" /></label
+  >
+
+  <label
+    >Cooking time: <input type="number" name="cookingTime" value="<%- isUpdating ?
+    recipe.cookingTime : "0" %>" /></label
+  >
+
+  <label
+    >Difficulty:
+    <select name="difficulty">
+      <% ['easy', 'medium', 'hard'].forEach(difficulty => { %>
+      <option value="<%- difficulty %>" <%- isUpdating ? (recipe.difficulty === difficulty ? "selected" : "") : "" %>><%- difficulty %></option>
+      <% }) %>
+    </select></label
+  >
+  <button type="submit"><%- isUpdating ? "Update" : "Create" %> Recipe</button>
+</form>

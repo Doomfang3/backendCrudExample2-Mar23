@@ -1,0 +1,18 @@
+<h1>All recipes</h1>
+<% if (recipes.length === 0) { %>
+<p>No recipe in the DB yet !</p>
+<% } else { %>
+<div style="display: grid; grid-template: auto / 1fr 1fr; gap: 10px">
+  <% recipes.forEach(recipe => { %>
+  <div style="border: 1px solid black">
+    <a href="/recipes/<%- recipe._id %>"><%= recipe.title %></a>
+    <div>
+      <a href="/recipes/<%- recipe._id %>/update">Modify</a>
+      <form method="POST" action="/recipes/<%- recipe._id %>/delete">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  </div>
+  <% }) %>
+</div>
+<% } %>
